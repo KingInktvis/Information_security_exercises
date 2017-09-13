@@ -34,6 +34,8 @@ public class Main {
             }else {
                 result = map.encryptString(original.toString());
             }
+        }else {
+            printUsageInformation();
         }
 
         System.out.print(result);
