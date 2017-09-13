@@ -19,7 +19,8 @@ public class FileIO {
 
             while (line != null) {
                 line = br.readLine();
-                text.append(line + "\n");
+                text.append(line);
+                text.append("\n");
             }
         }catch (IOException e){
             System.out.print(e);
@@ -27,7 +28,7 @@ public class FileIO {
         return text;
     }
 
-    public void writeFile(String path, StringBuilder text) {
+    public void writeFile(String path, String text) {
         try{
             PrintWriter writer = new PrintWriter(path, "UTF-8");
             writer.println(text);

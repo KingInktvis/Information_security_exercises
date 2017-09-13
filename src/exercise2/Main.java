@@ -39,6 +39,10 @@ public class Main {
         }
 
         System.out.print(result);
+
+        if (input.getValue("-e") != null) {
+            tool.writeFile(input.getValue("-e"), result);
+        }
     }
 
     public static void toLower(StringBuilder text) {
