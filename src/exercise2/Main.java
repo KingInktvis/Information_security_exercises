@@ -21,11 +21,12 @@ public class Main {
         }
 
         if (input.getValue("-shift") != null){
+            Shifting shifter = new Shifting();
             int shift = Integer.parseInt(input.getValue("-shift"));
             if (input.isSet("-d")){
-                result = decryptString(original.toString(), shift);
+                result = shifter.decryptString(original.toString(), shift);
             }else {
-                result = encryptString(original.toString(), shift);
+                result = shifter.encryptString(original.toString(), shift);
             }
         }else if (input.getValue("-map") != null) {
             Mapping map = new Mapping(input.getValue("-map"));
@@ -56,43 +57,7 @@ public class Main {
         }
     }
 
-    public static char encryptChar(char c, int key) {
-        c += key;
-        if ((c > 'z' && c < 'A') || c > 'Z') c -= 'z' - 'a' + 1;
-        return c;
-    }
 
-    public static String decryptString(String text, int key) {
-        StringBuilder build = new StringBuilder(text);
-        for (int i = 0; i < text.length(); i++) {
-            char c = build.charAt(i);
-            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
-                char d = decryptChar(c, key);
-                build.setCharAt(i, d);
-            }
-        }
-        return text;
-    }
-
-    public static String encryptString(String text, int key) {
-        StringBuilder build = new StringBuilder(text);
-        for (int i = 0; i < text.length(); i++) {
-            char c = build.charAt(i);
-            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
-                char d = encryptChar(c, key);
-                build.setCharAt(i, d);
-            }
-        }
-        return text;
-    }
-
-    public static char decryptChar(char c, int key) {
-        boolean up = false;
-
-        c -= key;
-        if (c < 'a' || c > 'z') c += 'z' - 'a' + 1;
-        return c;
-    }
 
     public static void printUsageInformation() {
         System.out.println(
