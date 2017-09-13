@@ -5,7 +5,11 @@ public class Mapping {
     private char[] key =        {'u', 'o', 'i', 'e', 'a', 'z', 'y', 'x', 'w', 'v', 't', 's', 'r', 'q', 'p', 'n', 'm', 'l', 'k', 'j', 'h', 'g', 'f', 'd', 'c', 'b'};
     private int convert;
 
-    public Mapping() {
+    public Mapping(String map) {
+        key = new char[26];
+        for (int i = 0; i < map.length(); i++) {
+            key[i] = map.charAt(i);
+        }
         convert = 'A' - 'a';
     }
 

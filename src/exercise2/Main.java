@@ -4,13 +4,17 @@ public class Main {
 
     public static void main(String[] args) {
         String result = "";
-
+        String loc;
         ArgsInterpreter input = new ArgsInterpreter(args);
-        String loc = input.getValue("-i") != null ? input.getValue("-i") : "res/2017.enc";
+        if (input.getValue("-i") != null) {
+            loc = input.getValue("-i");
+        }else {
+            return;
+        }
 
         FileIO tool = new FileIO();
 
-        StringBuilder original = tool.readFile("res/2017.enc");
+        StringBuilder original = tool.readFile(loc);
 
         if (!input.isSet("-o")){
             toLower(original);
@@ -24,7 +28,7 @@ public class Main {
                 result = encryptString(original.toString(), shift);
             }
         }else if (input.getValue("-map") != null) {
-            Mapping map = new Mapping();
+            Mapping map = new Mapping(input.getValue("-map"));
             if (input.isSet("-d")) {
                 result = map.decryptString(original.toString());
             }else {
