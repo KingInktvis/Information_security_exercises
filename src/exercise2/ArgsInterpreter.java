@@ -13,6 +13,7 @@ public class ArgsInterpreter {
         store = new HashMap<>();
         raw = args.clone();
         flags = new ArrayList<>();
+        undefined = new ArrayList<>();
         //loop through the arguments and sort them
         for (int i = 0; i < args.length; i++) {
             //check if it is a flag

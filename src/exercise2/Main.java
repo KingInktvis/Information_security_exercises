@@ -3,33 +3,34 @@ package exercise2;
 public class Main {
 
     public static void main(String[] args) {
-//        ArgsInterpreter input = new ArgsInterpreter(args);
-//
-//
-//        FileIO tool = new FileIO();
-//
-//        StringBuilder original = tool.readFile("res/2017.enc");
-//
-//        if (!input.isSet("-o")){
-//            toLower(original);
-//        }
-//
+
+
+        ArgsInterpreter input = new ArgsInterpreter(args);
+        String loc = input.getValue("-i") != null ? input.getValue("-i") : "res/2017.enc";
+
+        FileIO tool = new FileIO();
+
+        StringBuilder original = tool.readFile("res/2017.enc");
+
+        if (!input.isSet("-o")){
+            toLower(original);
+        }
+
 //        for (int i = 0; i < original.length(); i++) {
 //            char c = original.charAt(i);
 //            if (c >= 'a' && c <= 'z'){
-//                char d = decrypt(c, 1);
+//                char d = encrypt(c, 6);
 //                original.setCharAt(i, d);
 //            }
 //
 //        }
 //
 //        tool.writeFile("res/out.txt", original);
-//
-//        System.out.print(original);
 
-        StringBuilder test = new StringBuilder("z");
-        System.out.println(encrypt('z', 2));
-        System.out.println(decrypt('a', 2));
+        Mapping map = new Mapping();
+
+        System.out.print(map.decryptString(original.toString()));
+
     }
 
     public static void toLower(StringBuilder text) {
@@ -46,6 +47,10 @@ public class Main {
     public static char encrypt(char c, int key) {
         c += key;
         if (c > 'z') c -= 'z' - 'a' + 1;
+        return c;
+    }
+
+    public static char shuffleEncrypt(char c, char[] key) {
         return c;
     }
 
