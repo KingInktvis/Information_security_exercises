@@ -3,7 +3,7 @@ package exercise2;
 public class Main {
 
     public static void main(String[] args) {
-
+        String result = "";
 
         ArgsInterpreter input = new ArgsInterpreter(args);
         String loc = input.getValue("-i") != null ? input.getValue("-i") : "res/2017.enc";
@@ -16,21 +16,23 @@ public class Main {
             toLower(original);
         }
 
-//        for (int i = 0; i < original.length(); i++) {
-//            char c = original.charAt(i);
-//            if (c >= 'a' && c <= 'z'){
-//                char d = encrypt(c, 6);
-//                original.setCharAt(i, d);
-//            }
-//
-//        }
-//
-//        tool.writeFile("res/out.txt", original);
+        if (input.getValue("-shift") != null){
+            int shift = Integer.parseInt(input.getValue("-shift"));
+            if (input.isSet("-d")){
+                result = decryptString(original.toString(), shift);
+            }else {
+                result = encryptString(original.toString(), shift);
+            }
+        }else if (input.getValue("-map") != null) {
+            Mapping map = new Mapping();
+            if (input.isSet("-d")) {
+                result = map.decryptString(original.toString());
+            }else {
+                result = map.encryptString(original.toString());
+            }
+        }
 
-        Mapping map = new Mapping();
-
-        System.out.print(map.decryptString(original.toString()));
-
+        System.out.print(result);
     }
 
     public static void toLower(StringBuilder text) {
@@ -44,15 +46,41 @@ public class Main {
         }
     }
 
-    public static char encrypt(char c, int key) {
+    public static char encryptChar(char c, int key) {
         c += key;
-        if (c > 'z') c -= 'z' - 'a' + 1;
+        if ((c > 'z' && c < 'A') || c > 'Z') c -= 'z' - 'a' + 1;
         return c;
     }
 
-    public static char decrypt(char c, int key) {
+    public static String decryptString(String text, int key) {
+        StringBuilder build = new StringBuilder(text);
+        for (int i = 0; i < text.length(); i++) {
+            char c = build.charAt(i);
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                char d = decryptChar(c, key);
+                build.setCharAt(i, d);
+            }
+        }
+        return text;
+    }
+
+    public static String encryptString(String text, int key) {
+        StringBuilder build = new StringBuilder(text);
+        for (int i = 0; i < text.length(); i++) {
+            char c = build.charAt(i);
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                char d = encryptChar(c, key);
+                build.setCharAt(i, d);
+            }
+        }
+        return text;
+    }
+
+    public static char decryptChar(char c, int key) {
+        boolean up = false;
+
         c -= key;
-        if (c < 'a') c += 'z' - 'a' + 1;
+        if (c < 'a' || c > 'z') c += 'z' - 'a' + 1;
         return c;
     }
 

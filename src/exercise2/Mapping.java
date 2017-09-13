@@ -29,7 +29,6 @@ public class Mapping {
         return ret;
     }
 
-
     private int getAlphabetIndex(char c) {
         for (int i = 0; i < alphabet.length; i++) {
             if (alphabet[i] == c) return i;
@@ -48,8 +47,20 @@ public class Mapping {
         StringBuilder build = new StringBuilder(text);
         for (int i = 0; i < build.length(); i++) {
             char c = build.charAt(i);
-            if ((c >= 'a' && c <= 'z') || c >= 'A' && c <= 'Z') {
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
                 char d = decryptChar(c);
+                if (d != 0) build.setCharAt(i, d);
+            }
+        }
+        return build.toString();
+    }
+
+    public String encryptString(String text) {
+        StringBuilder build = new StringBuilder(text);
+        for (int i = 0; i < build.length(); i++) {
+            char c = build.charAt(i);
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                char d = encryptChar(c);
                 if (d != 0) build.setCharAt(i, d);
             }
         }
