@@ -16,12 +16,16 @@ public class Mapping {
     }
 
     public char decryptChar(char c) {
-        boolean up = c >= 'A';
+        boolean up = false;
+        if (c >= 'A' && c <= 'Z') {
+            up = true;
+        }
         if (up) c -= convert;
         int index = getKeyIndex(c);
         if (index == -1) return 0;
         char ret = alphabet[index];
         if (up) ret += convert;
+
         return ret;
     }
 

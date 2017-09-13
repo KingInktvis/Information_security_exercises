@@ -50,10 +50,6 @@ public class Main {
         return c;
     }
 
-    public static char shuffleEncrypt(char c, char[] key) {
-        return c;
-    }
-
     public static char decrypt(char c, int key) {
         c -= key;
         if (c < 'a') c += 'z' - 'a' + 1;
