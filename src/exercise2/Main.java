@@ -12,9 +12,9 @@ public class Main {
             return;
         }
 
-        FileIO tool = new FileIO();
+        FileIO io = new FileIO();
 
-        StringBuilder original = tool.readFile(loc);
+        StringBuilder original = io.readFile(loc);
 
         if (!input.isSet("-o")){
             toLower(original);
@@ -42,7 +42,7 @@ public class Main {
         System.out.print(result);
 
         if (input.getValue("-e") != null) {
-            tool.writeFile(input.getValue("-e"), result);
+            io.writeFile(input.getValue("-e"), result);
         }
     }
 
@@ -56,8 +56,6 @@ public class Main {
             }
         }
     }
-
-
 
     public static void printUsageInformation() {
         System.out.println(
