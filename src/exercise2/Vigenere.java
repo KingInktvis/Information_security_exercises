@@ -21,7 +21,6 @@ public class Vigenere {
         for (int i = 0; i < build.length(); i++) {
             char c = build.charAt(i);
             if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
-                System.out.print(shifts[pointer]);
                 build.setCharAt(i, shifter.encryptChar(c, shifts[pointer]));
                 pointer = (pointer + 1) % shifts.length;
             }

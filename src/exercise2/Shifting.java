@@ -2,8 +2,12 @@ package exercise2;
 
 public class Shifting {
     public char encryptChar(char c, int key) {
+        boolean up = false;
+        if (c >= 'A' && c <= 'Z') up = true;
         c += key;
-        if ((c > 'z' && c < 'A') || c > 'Z') c -= 'z' - 'a' + 1;
+        if ((!up && c > 'z') || (up && c > 'Z')) {
+            c -= 'z' - 'a' + 1;
+        }
         return c;
     }
 
@@ -33,9 +37,9 @@ public class Shifting {
 
     public char decryptChar(char c, int key) {
         boolean up = false;
-
+        if (c >= 'A' && c <= 'Z') up = true;
         c -= key;
-        if (c < 'a' || c > 'z') c += 'z' - 'a' + 1;
+        if ((!up && c < 'a') || (up && c < 'A')) c += 'z' - 'a' + 1;
         return c;
     }
 }
