@@ -28,8 +28,21 @@ public class Vigenere {
         return build.toString();
     }
 
+    public String decrypt(String text) {
+        StringBuilder build = new StringBuilder(text);
+        int pointer = 0;
+        for (int i = 0; i < build.length(); i++) {
+            char c = build.charAt(i);
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                build.setCharAt(i, shifter.decryptChar(c, shifts[pointer]));
+                pointer = (pointer + 1) % shifts.length;
+            }
+        }
+        return build.toString();
+    }
+
     public static void main(String[] args) {
         Vigenere v = new Vigenere("abc");
-        System.out.print(v.encrypt("hello"));
+        System.out.print(v.decrypt(v.encrypt("hello")));
     }
 }
