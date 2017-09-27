@@ -7,18 +7,20 @@ public class exercise11 {
 
     public exercise11() {
         StringBuilder powerBits = new StringBuilder(Integer.toBinaryString(power));
-        System.out.println(powerModulo(powerBits));
+        System.out.println(powerModulo(powerBits) % modulo);
     }
 
-    public int powerModulo(StringBuilder powerBits) {
+    public long powerModulo(StringBuilder powerBits) {
 
         if (powerBits.length() == 0) {
             return 1;
         }
         char decision = powerBits.charAt(powerBits.length() - 1);
         powerBits.deleteCharAt(powerBits.length() - 1);
-        int previous = powerModulo(powerBits);
-        int ret = (previous * previous) % modulo;
+        long previous = powerModulo(powerBits);
+        previous %= modulo;
+        long ret = previous * previous;
+        ret %= modulo;
         if (decision == '1') {
             ret *= base;
             ret %= modulo;
